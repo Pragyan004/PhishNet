@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishNet</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Animated Background -->
+    <div class="background-animation">
+      <div class="wave wave1"></div>
+      <div class="wave wave2"></div>
+      <div class="wave wave3"></div>
+    </div>
+    
+    <!-- Header with animated shield -->
+    <div class="header">
+      <div class="shield-container">
+        <div class="shield">
+          <svg viewBox="0 0 24 24" class="shield-icon">
+            <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/>
+          </svg>
+          <div class="shield-glow"></div>
+        </div>
+      </div>
+      <h1 class="title">PhishNet</h1>
+      <p class="tagline">
+        <span class="tagline-icon">⚡</span>
+        ML-Powered Protection
+        <span class="tagline-icon">⚡</span>
+      </p>
+    </div>
+    
+    <!-- Loading State -->
+    <div id="loading" class="loading">
+      <div class="scanning-animation">
+        <div class="scanner-line"></div>
+        <div class="scan-dots">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      <p class="loading-text">
+        <span class="loading-text-animated">Analyzing website</span>
+        <span class="dots">
+          <span>.</span><span>.</span><span>.</span>
+        </span>
+      </p>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+    
+    <!-- Result State -->
+    <div id="result" class="result hidden">
+      <!-- Status with animated icon -->
+      <div class="status-container">
+        <div id="status-icon" class="status-icon-wrapper">
+          <div class="pulse-ring"></div>
+          <div class="status-icon"></div>
+        </div>
+        <h2 id="status-text" class="status-text"></h2>
+        <p id="status-description" class="status-description"></p>
+      </div>
+      
+      <!-- Risk Meter -->
+      <div class="risk-meter">
+        <div class="meter-label">Threat Level</div>
+        <div class="meter-container">
+          <svg class="meter-svg" viewBox="0 0 200 120">
+            <path class="meter-bg" d="M 20 100 A 80 80 0 0 1 180 100" 
+                  stroke-width="20" fill="none"/>
+            <path id="meter-fill" class="meter-fill" d="M 20 100 A 80 80 0 0 1 180 100" 
+                  stroke-width="20" fill="none" stroke-dasharray="251.2" stroke-dashoffset="251.2"/>
+          </svg>
+          <div id="risk-score" class="meter-score">0%</div>
+        </div>
+        <div class="meter-labels">
+          <span class="safe-label">Safe</span>
+          <span class="danger-label">Danger</span>
+        </div>
+      </div>
+      
+      <!-- URL Info Card -->
+      <div class="info-card">
+        <div class="card-header">
+          <span class="card-icon">🔗</span>
+          <span class="card-title">Website Details</span>
+        </div>
+        <div class="url-display">
+          <div class="url-text" id="current-url" title=""></div>
+          <button class="copy-btn" id="copy-url" title="Copy URL">
+            <svg viewBox="0 0 24 24" width="16" height="16">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+          </button>
+        </div>
+        
+        <!-- Confidence indicator -->
+        <div class="confidence-section">
+          <div class="confidence-label">
+            <span>AI Confidence</span>
+            <span id="confidence-percent">0%</span>
+          </div>
+          <div class="confidence-bar">
+            <div id="confidence-fill" class="confidence-fill"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Security Indicators -->
+      <div id="security-indicators" class="security-indicators">
+        <div class="indicator" id="https-indicator">
+          <span class="indicator-icon">🔒</span>
+          <span class="indicator-text">HTTPS</span>
+          <span class="indicator-status"></span>
+        </div>
+        <div class="indicator" id="domain-indicator">
+          <span class="indicator-icon">🌐</span>
+          <span class="indicator-text">Domain</span>
+          <span class="indicator-status"></span>
+        </div>
+        <div class="indicator" id="age-indicator">
+          <span class="indicator-icon">📅</span>
+          <span class="indicator-text">Content</span>
+          <span class="indicator-status"></span>
+        </div>
+      </div>
+      
+      <!-- Feature Details (Collapsible) -->
+      <div id="features" class="features-section hidden">
+        <div class="features-header">
+          <span class="features-icon">🔍</span>
+          <span>Technical Analysis</span>
+        </div>
+        <div id="features-list" class="features-grid"></div>
+      </div>
+      
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button id="toggle-details" class="btn btn-secondary">
+          <svg viewBox="0 0 24 24" width="16" height="16">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+          <span>Show Details</span>
+        </button>
+        <button id="scan-again" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" width="16" height="16">
+            <polyline points="23 4 23 10 17 10"/>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+          </svg>
+          <span>Scan Again</span>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Error State -->
+    <div id="error" class="error hidden">
+      <div class="error-animation">
+        <div class="error-icon">⚠️</div>
+        <div class="error-circle"></div>
+      </div>
+      <h2>Oops! Something went wrong</h2>
+      <p id="error-message"></p>
+      <button id="retry-btn" class="btn btn-retry">
+        <svg viewBox="0 0 24 24" width="16" height="16">
+          <polyline points="23 4 23 10 17 10"/>
+          <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+        </svg>
+        <span>Try Again</span>
+      </button>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-stats">
+        <div class="stat">
+          <span class="stat-icon">🛡️</span>
+          <span>Protected</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-icon">⚡</span>
+          <span>Client-side</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-icon">🔒</span>
+          <span>Private</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="ort.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
