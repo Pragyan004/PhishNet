@@ -120,18 +120,17 @@ The model outputs a **probability (0–1)**:
 ## 🖼️ Screenshots
 
 ### 🔹 Extension Popup – Safe Website
-![Safe Website](screenshots/safe.png)
+<img width="264" height="718" alt="image" src="https://github.com/user-attachments/assets/7fd98bad-d173-4538-8556-abdb783523ff" />
+
 
 ### 🔹 Extension Popup – Suspicious Website
-![Suspicious Website](screenshots/suspicious.png)
+<img width="282" height="781" alt="image" src="https://github.com/user-attachments/assets/f7e8b046-1336-4ffe-b692-5b92c8d85f24" />
+
 
 ### 🔹 Extension Popup – Dangerous Website
-![Dangerous Website](screenshots/danger.png)
+<img width="320" height="862" alt="image" src="https://github.com/user-attachments/assets/c9acc7e6-598b-4854-8cfa-a1930a9cb417" />
 
-### 🔹 Probability Meter View
-![Probability Meter](screenshots/probability_meter.png)
 
-> 📌 Place your screenshots inside a `screenshots/` folder.
 
 ---
 
